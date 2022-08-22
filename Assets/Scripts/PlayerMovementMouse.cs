@@ -61,7 +61,7 @@ public class PlayerMovementMouse : MonoBehaviour
 
     public void pauseMove()
     {
-        Debug.Log("Pausingmove");
+        //Debug.Log("Pausingmove");
         moving=false;
     }
 }
