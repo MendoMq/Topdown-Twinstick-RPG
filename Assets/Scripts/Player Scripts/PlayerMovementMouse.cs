@@ -8,8 +8,6 @@ public class PlayerMovementMouse : MonoBehaviour
     public float speed;
     Vector3 destination;
     bool moving;
-    public float minDistance;
-    public Vector3 inputVector;
     public Rigidbody rb;
     Vector3 movement;
 
