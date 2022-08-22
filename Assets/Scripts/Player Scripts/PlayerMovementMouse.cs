@@ -13,16 +13,17 @@ public class PlayerMovementMouse : MonoBehaviour
     public Rigidbody rb;
     Vector3 movement;
 
-    int layerMask = 1 << 6;
-    // Start is called before the first frame update
+    //int layerMask = 1 << 6;
+    
     void Start()
     {
         player = GameObject.FindWithTag("Player");
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        /* To be removed???
         if(Input.GetMouseButton(1)){
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             RaycastHit hit;
@@ -32,6 +33,7 @@ public class PlayerMovementMouse : MonoBehaviour
                 moving =true;
             }
         }
+        */
         
         player.transform.rotation=Quaternion.identity;
         if(Input.GetKey(KeyCode.W)){
