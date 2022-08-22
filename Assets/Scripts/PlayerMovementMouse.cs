@@ -10,6 +10,8 @@ public class PlayerMovementMouse : MonoBehaviour
     bool moving;
     public float minDistance;
     public Vector3 inputVector;
+    public Rigidbody rb;
+    Vector3 movement;
 
     int layerMask = 1 << 6;
     // Start is called before the first frame update
@@ -47,11 +49,16 @@ public class PlayerMovementMouse : MonoBehaviour
         
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(x, 0, z);
-        player.transform.Translate(movement * speed * Time.deltaTime);
+        movement = new Vector3(x, 0, z);
+        //player.transform.Translate(movement * speed * Time.deltaTime);
 
         
         if(moving)moveStep();
+    }
+
+    void FixedUpdate()
+    {
+        rb.position += movement * speed * 0.06f;
     }
 
     void moveStep()
