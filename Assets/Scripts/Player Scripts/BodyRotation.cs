@@ -24,6 +24,7 @@ public class BodyRotation : MonoBehaviour
             Mathf.Lerp(transform.eulerAngles.y,head.transform.eulerAngles.y,t)+360,
             transform.eulerAngles.z+360
         );*/
+        
         target = Vector3.Slerp(target,head.transform.forward,t);
 
         Quaternion rotate = Quaternion.LookRotation(target, Vector3.up);

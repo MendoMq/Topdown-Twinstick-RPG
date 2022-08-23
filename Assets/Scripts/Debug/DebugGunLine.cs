@@ -39,13 +39,19 @@ public class DebugGunLine : MonoBehaviour
                 }
             }
         }
-        Debug.DrawLine(transform.position, hit.point, color);
 
-        if(Input.GetMouseButton(1)){
-            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-            if (Physics.Raycast (ray, out hit, 1000, layerMask)) {
-                
+        /*if(Input.GetMouseButton(1)){
+            Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+            //Camera to Worldspace (CamRay)
+            if (Physics.Raycast (camRay, out camHit, 1000, layerMask)) {
+                Vector3 realDir= camHit.point - transform.position;
+                Ray realRay = new Ray(transform.position,realDir);
+                //CamRay to GunRay
+                if(Physics.Raycast (realRay, out hit, 1000, layerMask)){
+                    hitCubeClone = Instantiate(hitCubePrefab, hit.point, Quaternion.identity); 
+                }
             }
-        }
+        }*/
+        Debug.DrawLine(transform.position, hit.point, color);
     }
 }
