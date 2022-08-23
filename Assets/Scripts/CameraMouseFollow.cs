@@ -13,11 +13,11 @@ public class CameraMouseFollow : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButtonDown(1)){
-            minRadius=2;
             maxRadius=8;
+            minRadius=2;
         }else if(Input.GetMouseButtonUp(1)){
-            minRadius=5;
             maxRadius=3;
+            minRadius=6;
         }
         
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -29,10 +29,12 @@ public class CameraMouseFollow : MonoBehaviour
             float magnitude = difference.magnitude;
             if (magnitude > maxRadius) {
                 difference = difference * (maxRadius / magnitude);
+                slerpFrac = 0.1f;
             }
 
             if (magnitude < minRadius) {
                 difference = Vector3.zero;
+                slerpFrac = 0.075f;
             }
 
             GetComponent<Rigidbody>().position = Vector3.Lerp(transform.position,new Vector3(player.position.x + difference.x,player.position.y,player.position.z + difference.z),slerpFrac);      

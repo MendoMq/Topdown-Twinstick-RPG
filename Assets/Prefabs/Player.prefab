@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053336446}
-  - component: {fileID: 2053336447}
+  - component: {fileID: 7989466891872311602}
   m_Layer: 3
   m_Name: PlayerGunObject
   m_TagString: Untagged
@@ -162,7 +162,7 @@ Transform:
   m_Father: {fileID: 782928828525375621}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2053336447
+--- !u!114 &7989466891872311602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,11 +171,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2053336445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ac216be3bc5a744902ee7fefe2049d, type: 3}
+  m_Script: {fileID: 11500000, guid: c43ee252b12bf8f48bb6bd1c39a3589f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   forceMulti: 5
-  color: {r: 1, g: 0.87590486, b: 0, a: 1}
+  color: {r: 1, g: 0.8745099, b: 0, a: 1}
   hitCubePrefab: {fileID: 6068478434245342151, guid: 2713dd2bb7550c44cb560bf5a87766e4, type: 3}
 --- !u!1 &782928828386037692
 GameObject:
