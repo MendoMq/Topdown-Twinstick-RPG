@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7ac216be3bc5a744902ee7fefe2049d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceMulti: 2
+  forceMulti: 5
   color: {r: 1, g: 0.87590486, b: 0, a: 1}
   hitCubePrefab: {fileID: 6068478434245342151, guid: 2713dd2bb7550c44cb560bf5a87766e4, type: 3}
 --- !u!1 &782928828386037692
@@ -499,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 782928829370188017}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.125, z: 0}
-  m_LocalScale: {x: 2, y: 0.05, z: 2}
+  m_LocalScale: {x: 10, y: 0.05, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 782928828386037695}

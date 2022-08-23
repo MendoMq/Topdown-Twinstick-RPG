@@ -32,7 +32,7 @@ public class DebugGunLine : MonoBehaviour
                 //CamRay to GunRay
                 if(Physics.Raycast (realRay, out hit, 1000, layerMask)){
                     if(hit.transform.gameObject.GetComponent<Rigidbody>()!=null){
-                        Vector3 dir = hit.transform.position-transform.position;
+                        Vector3 dir = Vector3.Normalize(hit.transform.position-transform.position);
                         hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(dir * forceMulti, ForceMode.Impulse);
                     }
                     hitCubeClone = Instantiate(hitCubePrefab, hit.point, Quaternion.identity); 
