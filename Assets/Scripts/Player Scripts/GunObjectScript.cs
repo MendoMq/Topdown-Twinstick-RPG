@@ -12,8 +12,8 @@ public class GunObjectScript : MonoBehaviour
     RaycastHit hit;
     GameObject cam;
     Transform startingTransform;
-    GameObject hitCubeClone;
-    public GameObject hitCubePrefab;
+    GameObject hitEffect;
+    public GameObject hitEffectPrefab;
 
     void Start() {
         cam = GameObject.FindWithTag("MainCamera");
@@ -24,8 +24,11 @@ public class GunObjectScript : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButtonDown(0)){
+            // Ammo Calc?
+            // Realistic Weapon Handling?
             shootSingle();
         }
+        //Reloading?
 
         Debug.DrawLine(transform.position, hit.point, color);
     }
@@ -38,11 +41,22 @@ public class GunObjectScript : MonoBehaviour
             Ray realRay = new Ray(transform.position,realDir);
             //CamRay to GunRay
             if(Physics.Raycast (realRay, out hit, 1000, layerMask)){
+                // Physics Hit
                 if(hit.transform.gameObject.GetComponent<Rigidbody>()!=null){
                     Vector3 dir = Vector3.Normalize(hit.transform.position-transform.position);
                     hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(dir * forceMulti, ForceMode.Impulse);
                 }
-                hitCubeClone = Instantiate(hitCubePrefab, hit.point, Quaternion.identity); 
+                // Effect Instancing
+                if(hit.transform.gameObject.layer == LayerMask.NameToLayer("StaticEnv") || hit.transform.gameObject.layer == LayerMask.NameToLayer("GroundPlane")){
+                    Debug.Log(hit.normal);
+                    Quaternion quaternion = Quaternion.Euler(-90 + hit.normal.x*-90 + hit.normal.z*-90,-90+hit.normal.y*90 + hit.normal.z*90,0);
+                    hitEffect = Instantiate(hitEffectPrefab, hit.point, quaternion); 
+                }
+                // Damage Calc?
+
+                // Stat Tracking?
+
+                // Animations?
             }
         }
     }

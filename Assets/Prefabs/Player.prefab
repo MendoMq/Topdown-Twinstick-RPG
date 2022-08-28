@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceMulti: 5
   color: {r: 1, g: 0.8745099, b: 0, a: 1}
-  hitCubePrefab: {fileID: 6068478434245342151, guid: 2713dd2bb7550c44cb560bf5a87766e4, type: 3}
+  hitEffectPrefab: {fileID: 8508730084221843826, guid: bc565bc85a119c9418c842f46e43c0c2, type: 3}
 --- !u!1 &782928828386037692
 GameObject:
   m_ObjectHideFlags: 0

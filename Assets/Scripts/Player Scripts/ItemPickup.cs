@@ -56,6 +56,7 @@ public class ItemPickup : MonoBehaviour
     }
 
     public void ItemCollect(int itemID){
+        // Calling Item Effect Script (GameManager?)
         switch (itemID)
         {
            case 1:
