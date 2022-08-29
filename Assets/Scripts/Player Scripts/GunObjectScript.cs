@@ -5,7 +5,8 @@ using UnityEngine;
 public class GunObjectScript : MonoBehaviour
 {
     
-    int layerMask = ~((1 << 3)|(1 << 7)|(1 << 8)|(1 << 10));
+    int layerMask = ~((1 << 3)|(1 << 7)|(1 << 8)|(1 << 10)|(1 << 12));
+    public LayerMask ignoreLayers;
     public float forceMulti=1;
     public Color color; 
     RaycastHit camHit;
@@ -48,7 +49,6 @@ public class GunObjectScript : MonoBehaviour
                 }
                 // Effect Instancing
                 if(hit.transform.gameObject.layer == LayerMask.NameToLayer("StaticEnv") || hit.transform.gameObject.layer == LayerMask.NameToLayer("GroundPlane")){
-                    Debug.Log(hit.normal);
                     Quaternion quaternion = Quaternion.Euler(-90 + hit.normal.x*-90 + hit.normal.z*-90,-90+hit.normal.y*90 + hit.normal.z*90,0);
                     hitEffect = Instantiate(hitEffectPrefab, hit.point, quaternion); 
                 }

@@ -174,9 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c43ee252b12bf8f48bb6bd1c39a3589f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
   forceMulti: 5
   color: {r: 1, g: 0.8745099, b: 0, a: 1}
-  hitEffectPrefab: {fileID: 8508730084221843826, guid: bc565bc85a119c9418c842f46e43c0c2, type: 3}
+  hitEffectPrefab: {fileID: 4714586834868336856, guid: 27d6b7adedaea7b4d8698d2df73b82b7, type: 3}
 --- !u!1 &782928828386037692
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +192,7 @@ GameObject:
   - component: {fileID: 782928828386037694}
   - component: {fileID: 782928828386037689}
   - component: {fileID: 782928828386037688}
+  - component: {fileID: 1618296387}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -259,6 +263,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!114 &1618296387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782928828386037692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05316fbec6b58f4f8ed4f52bed500da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 782928828386037688}
 --- !u!1 &782928828525375866
 GameObject:
   m_ObjectHideFlags: 0
