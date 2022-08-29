@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovementMouse : MonoBehaviour
 {
     GameObject player;
-    public float speed;
+    float speedMulti = 1;
     Vector3 destination;
     bool moving;
     public Rigidbody rb;
@@ -54,16 +54,40 @@ public class PlayerMovementMouse : MonoBehaviour
 
         
         if(moving)moveStep();
+        
     }
 
     void FixedUpdate()
     {
-        rb.position += movement * speed * 0.06f;
+        rb.position += movement * speedMulti * 0.06f;
+    }
+
+    public void SetSpeed(float newSpeed){
+        speedMulti = newSpeed;
+        if(speedMulti<0)speedMulti=0;
+        Debug.Log("New speed: "+speedMulti);
+    }
+    
+    public void ChangeSpeed(float newSpeed){
+        speedMulti += newSpeed;
+        if(speedMulti<0)speedMulti=0;
+        Debug.Log("Speed changed: "+newSpeed);
+        Debug.Log("New speed: "+speedMulti);
+    }
+
+    public void ResetSpeed(){
+        speedMulti = 1;
+        Debug.Log("Speed reset");
+    }
+
+    public float GetSpeed(){
+        Debug.Log("Returning speed: "+speedMulti);
+        return speedMulti;
     }
 
     void moveStep()
     {
-        player.transform.position = Vector3.MoveTowards(player.transform.position, destination, Time.deltaTime * speed);
+        player.transform.position = Vector3.MoveTowards(player.transform.position, destination, Time.deltaTime * speedMulti);
     }
 
     public void pauseMove()
