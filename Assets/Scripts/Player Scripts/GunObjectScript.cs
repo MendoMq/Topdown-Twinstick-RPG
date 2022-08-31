@@ -18,9 +18,9 @@ public class GunObjectScript : MonoBehaviour
     public GameObject hitEffectPrefab;
 
     public int weaponID;
-    public int ammo;
+    int ammo;
 
-    public bool cocked;
+    bool cocked;
 
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI cockedText;

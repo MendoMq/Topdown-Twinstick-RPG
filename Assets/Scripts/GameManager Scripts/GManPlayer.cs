@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GManPlayerMovement : MonoBehaviour
+public class GManPlayer : MonoBehaviour
 {
     PlayerMovementMouse pmm;
     GunObjectScript gos;
@@ -39,4 +39,12 @@ public class GManPlayerMovement : MonoBehaviour
             gos.SetRateOfFire(1000);
         }
     }
+    // Time based Effects? Toggleable?
+
+    // Player Health, Speed, Stats and Skills
+    // Item Effect Handling
+    // Gun Type, Ammo, Charged, RateOfFire and Automatic
+
+    // Maybe a different script?
+    // Menus, Inventory, Player status, etc
 }
