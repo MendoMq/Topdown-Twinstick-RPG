@@ -18,16 +18,21 @@ public class GunObjectScript : MonoBehaviour
     public GameObject hitEffectPrefab;
 
     public int weaponID;
-    int ammo;
 
+    public bool automatic;
+    
+    int ammo;
     bool cocked;
+
+    float timeToShoot;
+    float extraTimePerShot = 0.1f;
+
+    float spreadMulti = 0;
+    float spreadPerShot = 0.08f;
+    float spreadDecrease = 0.2f;
 
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI cockedText;
-
-    public bool automatic;
-    float timeToShoot;
-    public float extraTimePerShot;
 
     void Start() {
         cam = GameObject.FindWithTag("MainCamera");
@@ -39,6 +44,12 @@ public class GunObjectScript : MonoBehaviour
     
     void Update()
     {   
+        if(spreadMulti > 0){
+            spreadMulti -=spreadDecrease * Time.deltaTime;
+        }else if(spreadMulti<0){
+            spreadMulti=0;
+        }
+        
         // Primary Shot
         if(automatic){ // Automatic
             if(Input.GetMouseButton(0)){
@@ -109,6 +120,8 @@ public class GunObjectScript : MonoBehaviour
         //Camera to Worldspace (CamRay)
         if (Physics.Raycast (camRay, out camHit, 1000, layerMask)) {
             Vector3 realDir= camHit.point - transform.position;
+            // Inaccurate Spread Calculation
+            realDir = spreadCalc(realDir);
             Ray realRay = new Ray(transform.position,realDir);
             //CamRay to GunRay
             if(Physics.Raycast (realRay, out hit, 1000, layerMask)){
@@ -123,15 +136,26 @@ public class GunObjectScript : MonoBehaviour
                     hitEffect = Instantiate(hitEffectPrefab, hit.point, quaternion); 
                 }
                 Debug.DrawLine(transform.position, hit.point, color, 5);
-                // Inaccuracy?
-
                 // Damage Calc?
 
                 // Stat Tracking?
 
                 // Animations?
+                if(spreadMulti<0.8f-spreadPerShot){
+                    spreadMulti+=spreadPerShot;
+                }else{
+                    spreadMulti=0.8f;
+                }
             }
         }
+    }
+
+    Vector3 spreadCalc(Vector3 dir){
+        float inaccDist = Vector3.Distance(transform.position, camHit.point);
+        dir.x += ((1 - 2 * Random.value) * spreadMulti) * inaccDist;
+        dir.y += ((1 - 2 * Random.value) * spreadMulti) * inaccDist + (spreadMulti * 0.5f);
+        dir.z += ((1 - 2 * Random.value) * spreadMulti) * inaccDist;
+        return dir;
     }
 
     void Reload(int weaponID){
@@ -140,11 +164,37 @@ public class GunObjectScript : MonoBehaviour
             case 0:
             ammo = 8;
             break;
+
+            case 1:
+            ammo = 30;
+            break;
         }
     }
 
     public void SetWeaponID(int newWepID){
         weaponID = newWepID;
+        ammo = 0;
+        cocked = false;
+        UpdateAmmoText();
+        UpdateCockedText();
+        switch(weaponID)
+        {
+            //DEBUG PISTOL
+            case 0:
+            automatic =false;
+            spreadPerShot = 0.08f;
+            spreadDecrease = 0.2f;
+            SetRateOfFire(600);
+            break;
+
+            //DEBUG AR
+            case 1:
+            automatic =true;
+            spreadPerShot = 0.04f;
+            spreadDecrease = 0.25f;
+            SetRateOfFire(1000);
+            break;
+        }
     }
 
     public void SetAmmo(int newAmmo){
@@ -161,5 +211,13 @@ public class GunObjectScript : MonoBehaviour
 
     public void SetAutomatic(bool newAuto){
         automatic = newAuto;
+    }
+
+    public void SetSpreadPerShot(float newSpread){
+        spreadPerShot = newSpread;
+    }
+
+    public void SetSpreadDecrease(float newSpreadDec){
+        spreadDecrease = newSpreadDec;
     }
 }

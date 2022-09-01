@@ -33,10 +33,10 @@ public class GManPlayer : MonoBehaviour
             pmm.GetSpeed();
         }
         if(Input.GetKeyDown(KeyCode.Alpha6)){
-            gos.SetRateOfFire(600);
+            gos.SetWeaponID(0);
         }
         if(Input.GetKeyDown(KeyCode.Alpha7)){
-            gos.SetRateOfFire(1000);
+            gos.SetWeaponID(1);
         }
     }
     // Time based Effects? Toggleable?

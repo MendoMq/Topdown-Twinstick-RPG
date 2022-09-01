@@ -180,6 +180,10 @@ MonoBehaviour:
   forceMulti: 5
   color: {r: 1, g: 0.8745099, b: 0, a: 1}
   hitEffectPrefab: {fileID: 4714586834868336856, guid: 27d6b7adedaea7b4d8698d2df73b82b7, type: 3}
+  weaponID: 0
+  automatic: 0
+  ammoText: {fileID: 0}
+  cockedText: {fileID: 0}
 --- !u!1 &782928828386037692
 GameObject:
   m_ObjectHideFlags: 0
