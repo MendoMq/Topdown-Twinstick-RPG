@@ -19,8 +19,8 @@ TagManager:
   - PropCol
   - StaticEnv
   - PlayerBlocker
-  - 
-  - 
+  - Enemy
+  - VisionBlocker
   - 
   - 
   - 
