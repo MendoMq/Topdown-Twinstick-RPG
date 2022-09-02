@@ -38,6 +38,9 @@ public class GManPlayer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha7)){
             gos.SetWeaponID(1);
         }
+        if(Input.GetKeyDown(KeyCode.Alpha8)){
+            gos.SetWeaponID(2);
+        }
     }
     // Time based Effects? Toggleable?
 

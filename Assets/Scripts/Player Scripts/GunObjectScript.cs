@@ -27,6 +27,8 @@ public class GunObjectScript : MonoBehaviour
     float timeToShoot;
     float extraTimePerShot = 0.1f;
 
+    int bulletsPerShot =1;
+
     float spreadMulti = 0;
     float spreadPerShot = 0.08f;
     float spreadDecrease = 0.2f;
@@ -58,10 +60,10 @@ public class GunObjectScript : MonoBehaviour
                     if(ammo>0 && cocked){
                         ammo--;
                         UpdateAmmoText();
-                        ShootSingle();
+                        Shoot();
                     }
                     else if(ammo==0 && cocked){
-                        ShootSingle();
+                        Shoot();
                         cocked = false;
                         UpdateCockedText();
                     }
@@ -74,10 +76,10 @@ public class GunObjectScript : MonoBehaviour
                     if(ammo>0 && cocked){
                         ammo--;
                         UpdateAmmoText();
-                        ShootSingle();
+                        Shoot();
                     }
                     else if(ammo==0 && cocked){
-                        ShootSingle();
+                        Shoot();
                         cocked = false;
                         UpdateCockedText();
                     }
@@ -115,6 +117,30 @@ public class GunObjectScript : MonoBehaviour
         cockedText.text = new string(("Charged: "+cocked).ToString());
     }
 
+    void Shoot(){
+        if(bulletsPerShot==1){
+            ShootSingle();
+            if(spreadMulti<0.8f-spreadPerShot){
+                spreadMulti+=spreadPerShot;
+            }else{
+                spreadMulti=0.8f;
+            }
+        }else{
+            if(spreadMulti<0.8f-spreadPerShot){
+                spreadMulti+=spreadPerShot;
+            }else{
+                spreadMulti=0.8f;
+            }
+            for(int i=0;i<bulletsPerShot;i++){
+                ShootSingle();
+            }
+        }
+
+        
+
+        Debug.Log(spreadMulti);
+    }
+
     void ShootSingle(){
         Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
         //Camera to Worldspace (CamRay)
@@ -141,11 +167,6 @@ public class GunObjectScript : MonoBehaviour
                 // Stat Tracking?
 
                 // Animations?
-                if(spreadMulti<0.8f-spreadPerShot){
-                    spreadMulti+=spreadPerShot;
-                }else{
-                    spreadMulti=0.8f;
-                }
             }
         }
     }
@@ -168,6 +189,10 @@ public class GunObjectScript : MonoBehaviour
             case 1:
             ammo = 30;
             break;
+
+            case 2:
+            ammo = 5;
+            break;
         }
     }
 
@@ -184,6 +209,7 @@ public class GunObjectScript : MonoBehaviour
             automatic =false;
             spreadPerShot = 0.08f;
             spreadDecrease = 0.2f;
+            bulletsPerShot =1;
             SetRateOfFire(600);
             break;
 
@@ -192,7 +218,17 @@ public class GunObjectScript : MonoBehaviour
             automatic =true;
             spreadPerShot = 0.04f;
             spreadDecrease = 0.25f;
+            bulletsPerShot =1;
             SetRateOfFire(1000);
+            break;
+
+            //DEBUG SHOTGUN
+            case 2:
+            automatic =false;
+            spreadPerShot = 0.1f;
+            spreadDecrease = 0.2f;
+            bulletsPerShot =8;
+            SetRateOfFire(80);
             break;
         }
     }

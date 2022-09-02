@@ -27,6 +27,11 @@ public class CameraMouseFollow : MonoBehaviour
  
             Vector3 difference = mousePos - player.position;
             float magnitude = difference.magnitude;
+
+            if(Input.GetKey(KeyCode.LeftControl) && !(Input.GetMouseButton(1))){
+                magnitude=0;
+            }
+
             if (magnitude > maxRadius) {
                 difference = difference * (maxRadius / magnitude);
                 slerpFrac = 0.1f;
