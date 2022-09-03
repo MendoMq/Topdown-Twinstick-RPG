@@ -6,6 +6,11 @@ public class GManPlayer : MonoBehaviour
 {
     PlayerMovementMouse pmm;
     GunObjectScript gos;
+
+    bool speedActive=false;
+    public float speedIncrease = 0.5f;
+    public float speedTimeLength = 2;
+    float speedTimeRemaining;
     
     // Start is called before the first frame update
     void Start()
@@ -41,8 +46,43 @@ public class GManPlayer : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Alpha8)){
             gos.SetWeaponID(2);
         }
+
+        if(speedActive && speedTimeRemaining<Time.time){
+            pmm.ChangeSpeed(-speedIncrease);
+            speedActive=false;
+            Debug.Log("Speed worn off");
+        }
     }
-    // Time based Effects? Toggleable?
+
+    public void ItemCollect(int itemID){
+        switch (itemID)
+        {
+            // RELOAD
+            case 1:
+            Debug.Log("Reload Weapon Item");
+            gos.Reload(gos.GetWepID());
+            break;
+
+            // SPEED
+            case 2:
+            Debug.Log("Temp Increased Speed Item");
+            SpeedItem();
+            break;
+
+            default:
+            Debug.Log("Incorrect item handling");
+            break;
+        }
+    }
+
+    void SpeedItem(){
+        // Potentially just for debug, Unknown if to be implemented as is (MAY NEED REVISION)
+        speedActive=true;
+        pmm.ChangeSpeed(speedIncrease);
+        speedTimeRemaining = Time.time + speedTimeLength;
+    }
+
+    // Time based Effects + Toggleables
 
     // Player Health, Speed, Stats and Skills
     // Item Effect Handling

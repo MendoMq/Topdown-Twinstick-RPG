@@ -37,6 +37,7 @@ public class GunObjectScript : MonoBehaviour
     public TextMeshProUGUI cockedText;
 
     void Start() {
+        
         cam = GameObject.FindWithTag("MainCamera");
         startingTransform = transform;
         UpdateAmmoText();
@@ -51,6 +52,8 @@ public class GunObjectScript : MonoBehaviour
         }else if(spreadMulti<0){
             spreadMulti=0;
         }
+
+        
         
         // Primary Shot
         if(automatic){ // Automatic
@@ -66,6 +69,13 @@ public class GunObjectScript : MonoBehaviour
                         Shoot();
                         cocked = false;
                         UpdateCockedText();
+                    }else if(ammo>0 && !cocked){
+                        timeToShoot = Time.time + extraTimePerShot*2;
+                        ammo--;
+                        cocked = true;
+                        UpdateAmmoText();
+                        UpdateCockedText();
+                        Debug.Log("Executed slide release");
                     }
                 }
             }
@@ -82,6 +92,13 @@ public class GunObjectScript : MonoBehaviour
                         Shoot();
                         cocked = false;
                         UpdateCockedText();
+                    }else if(ammo>0 && !cocked){
+                        timeToShoot = Time.time + extraTimePerShot*2;
+                        ammo--;
+                        cocked = true;
+                        UpdateAmmoText();
+                        UpdateCockedText();
+                        Debug.Log("Executed slide release");
                     }
                 }
             }
@@ -90,7 +107,6 @@ public class GunObjectScript : MonoBehaviour
         // Reload
         if(Input.GetKeyDown(KeyCode.R)){
             Reload(weaponID);
-            UpdateAmmoText();
         }
 
         // Cocking / Charging
@@ -179,7 +195,7 @@ public class GunObjectScript : MonoBehaviour
         return dir;
     }
 
-    void Reload(int weaponID){
+    public void Reload(int weaponID){
         switch(weaponID)
         {
             case 0:
@@ -194,6 +210,7 @@ public class GunObjectScript : MonoBehaviour
             ammo = 5;
             break;
         }
+        UpdateAmmoText();
     }
 
     public void SetWeaponID(int newWepID){
@@ -231,6 +248,10 @@ public class GunObjectScript : MonoBehaviour
             SetRateOfFire(80);
             break;
         }
+    }
+
+    public int GetWepID(){
+        return weaponID;
     }
 
     public void SetAmmo(int newAmmo){

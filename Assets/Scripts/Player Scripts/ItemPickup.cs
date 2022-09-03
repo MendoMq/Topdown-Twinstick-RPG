@@ -9,10 +9,11 @@ public class ItemPickup : MonoBehaviour
     public Color lineColor;
     public float nearestDistance;
     List<GameObject> items = new List<GameObject>();
+    GManPlayer gMan;
 
     void Start()
     {
-        
+        gMan = GameObject.FindWithTag("GameManager").GetComponent<GManPlayer>();
     }
 
     // Update is called once per frame
@@ -61,10 +62,12 @@ public class ItemPickup : MonoBehaviour
         {
            case 1:
            Debug.Log("Collected debug 1");
+           gMan.ItemCollect(itemID);
            break; 
 
            case 2:
            Debug.Log("Collected debug 2");
+           gMan.ItemCollect(itemID);
            break; 
 
            default:

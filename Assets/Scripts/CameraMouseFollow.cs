@@ -8,16 +8,22 @@ public class CameraMouseFollow : MonoBehaviour
     [SerializeField] LayerMask layerMask;
     [SerializeField] Transform player;
     [SerializeField] float slerpFrac;
-    public float maxRadius;
-    public float minRadius;
+    float maxRadius;
+    float minRadius;
+
+    public float closeMaxRad=3;
+    public float closeMinRad=6;
+    public float farMaxRad=8;
+    public float farMinRad=2;
+
     void Update()
     {
         if(Input.GetMouseButtonDown(1)){
-            maxRadius=8;
-            minRadius=2;
+            maxRadius=farMaxRad;
+            minRadius=farMinRad;
         }else if(Input.GetMouseButtonUp(1)){
-            maxRadius=3;
-            minRadius=6;
+            maxRadius=closeMaxRad;
+            minRadius=closeMinRad;
         }
         
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
