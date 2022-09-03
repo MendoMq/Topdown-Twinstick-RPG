@@ -69,6 +69,7 @@ public class GManPlayer : MonoBehaviour
             SpeedItem();
             break;
 
+            // ERROR
             default:
             Debug.Log("Incorrect item handling");
             break;

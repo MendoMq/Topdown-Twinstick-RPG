@@ -5,8 +5,8 @@ using UnityEngine;
 public class ItemScript : MonoBehaviour
 {
     public int itemID;
-    public float distanceCollect = 0.5f;
-    public bool collecting;
+    float distanceCollect = 0.5f;
+    public bool collecting = false;
     GameObject player;
     
     // Start is called before the first frame update

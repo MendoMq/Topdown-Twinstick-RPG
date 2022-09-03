@@ -70,7 +70,7 @@ public class GunObjectScript : MonoBehaviour
                         cocked = false;
                         UpdateCockedText();
                     }else if(ammo>0 && !cocked){
-                        timeToShoot = Time.time + extraTimePerShot*2;
+                        timeToShoot = Time.time + extraTimePerShot*6;
                         ammo--;
                         cocked = true;
                         UpdateAmmoText();
@@ -154,7 +154,7 @@ public class GunObjectScript : MonoBehaviour
 
         
 
-        Debug.Log(spreadMulti);
+        Debug.Log("Spread Multiplier: "+spreadMulti);
     }
 
     void ShootSingle(){
