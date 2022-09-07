@@ -41,6 +41,8 @@ public class GunObjectScript : MonoBehaviour
     float reloadTime =1f;
     float timeToReload;
 
+    float weaponDamage=1;
+
     public GameObject sliderObject;
     Slider sliderScript;
 
@@ -173,7 +175,7 @@ public class GunObjectScript : MonoBehaviour
 
         
 
-        Debug.Log("Spread Multiplier: "+spreadMulti);
+        //Debug.Log("Spread Multiplier: "+spreadMulti);
     }
 
     void ShootSingle(){
@@ -196,6 +198,11 @@ public class GunObjectScript : MonoBehaviour
                     Quaternion quaternion = Quaternion.Euler(-90 + hit.normal.x*-90 + hit.normal.z*-90,-90+hit.normal.y*90 + hit.normal.z*90,0);
                     hitEffect = Instantiate(hitEffectPrefab, hit.point, quaternion); 
                 }
+
+                if(hit.transform.root.GetComponent<EntityHealth>()!=null){
+                    hit.transform.root.GetComponent<EntityHealth>().Damage(weaponDamage);
+                }
+
                 Debug.DrawLine(transform.position, hit.point, color, 5);
                 // Damage Calc?
 
@@ -244,6 +251,7 @@ public class GunObjectScript : MonoBehaviour
             case 0:
             automatic =false;
             reloadTime=1f;
+            weaponDamage=1;
             spreadPerShot = 0.08f;
             spreadDecrease = 0.2f;
             bulletsPerShot =1;
@@ -254,6 +262,7 @@ public class GunObjectScript : MonoBehaviour
             case 1:
             automatic =true;
             reloadTime=2f;
+            weaponDamage=0.8f;
             spreadPerShot = 0.04f;
             spreadDecrease = 0.25f;
             bulletsPerShot =1;
@@ -264,6 +273,7 @@ public class GunObjectScript : MonoBehaviour
             case 2:
             automatic =false;
             reloadTime=1f;
+            weaponDamage=0.8f;
             spreadPerShot = 0.1f;
             spreadDecrease = 0.2f;
             bulletsPerShot =8;
