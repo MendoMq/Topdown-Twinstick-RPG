@@ -16,6 +16,11 @@ public class CameraMouseFollow : MonoBehaviour
     public float farMaxRad=8;
     public float farMinRad=2;
 
+    void Start() {
+        maxRadius=closeMaxRad;
+        minRadius=closeMinRad;
+    }
+
     void Update()
     {
         if(Input.GetMouseButtonDown(1)){
