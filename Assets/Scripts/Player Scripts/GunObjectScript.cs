@@ -46,6 +46,8 @@ public class GunObjectScript : MonoBehaviour
     public GameObject sliderObject;
     Slider sliderScript;
 
+    bool gManHalt=false;
+
     void Start() {
         cam = GameObject.FindWithTag("MainCamera");
         startingTransform = transform;
@@ -57,83 +59,87 @@ public class GunObjectScript : MonoBehaviour
     
     void Update()
     {   
-        if(spreadMulti > 0){
+        if(spreadMulti > 0){ // Slowly decrease bullet spread when not firing
             spreadMulti -=spreadDecrease * Time.deltaTime;
         }else if(spreadMulti<0){
             spreadMulti=0;
         }
 
+        if(!gManHalt){ // Cant Interact while gManager is interupting (Sprinting)
+            if(!reloading){ // Cant Shoot while reloading
+                // Primary Shot
+                if(automatic){ // Automatic
+                    if(Input.GetMouseButton(0)){
+                        if(Time.time > timeToShoot){ // Rate of Fire
+                            timeToShoot = Time.time + extraTimePerShot;
+                            if(ammo>0 && cocked){
+                                ammo--;
+                                UpdateAmmoText();
+                                Shoot();
+                            }
+                            else if(ammo==0 && cocked){
+                                Shoot();
+                                cocked = false;
+                                UpdateCockedText();
+                            }else if(ammo>0 && !cocked){
+                                timeToShoot = Time.time + extraTimePerShot*6;
+                                ammo--;
+                                cocked = true;
+                                UpdateAmmoText();
+                                UpdateCockedText();
+                                Debug.Log("Executed slide release");
+                            }
+                        }
+                    }
+                }else{ // Semi-automatic
+                    if(Input.GetMouseButtonDown(0)){
+                        if(Time.time > timeToShoot){ // Rate of Fire
+                            timeToShoot = Time.time + extraTimePerShot;
+                            if(ammo>0 && cocked){
+                                ammo--;
+                                UpdateAmmoText();
+                                Shoot();
+                            }
+                            else if(ammo==0 && cocked){
+                                Shoot();
+                                cocked = false;
+                                UpdateCockedText();
+                            }else if(ammo>0 && !cocked){
+                                timeToShoot = Time.time + extraTimePerShot*2;
+                                ammo--;
+                                cocked = true;
+                                UpdateAmmoText();
+                                UpdateCockedText();
+                                Debug.Log("Executed slide release");
+                            }
+                        }
+                    }
+                }
+
+                // Cocking / Charging
+                if(Input.GetKeyDown(KeyCode.X)){
+                    if(ammo>0){
+                        ammo--;
+                        UpdateAmmoText();
+                        cocked = true;
+                        UpdateCockedText();
+                    }else if(ammo==0 && cocked){
+                        cocked=false;
+                        UpdateCockedText();
+                    }
+                }
+            }
+
+            // Reload
+            if(Input.GetKeyDown(KeyCode.R) && !reloading){
+                reloading=true;
+                timeToReload = Time.time + reloadTime;
+                sliderObject.SetActive(true);
+            }
+        }
+
         
-        if(!reloading){
-            // Primary Shot
-            if(automatic){ // Automatic
-                if(Input.GetMouseButton(0)){
-                    if(Time.time > timeToShoot){ // Rate of Fire
-                        timeToShoot = Time.time + extraTimePerShot;
-                        if(ammo>0 && cocked){
-                            ammo--;
-                            UpdateAmmoText();
-                            Shoot();
-                        }
-                        else if(ammo==0 && cocked){
-                            Shoot();
-                            cocked = false;
-                            UpdateCockedText();
-                        }else if(ammo>0 && !cocked){
-                            timeToShoot = Time.time + extraTimePerShot*6;
-                            ammo--;
-                            cocked = true;
-                            UpdateAmmoText();
-                            UpdateCockedText();
-                            Debug.Log("Executed slide release");
-                        }
-                    }
-                }
-            }else{ // Semi-automatic
-                if(Input.GetMouseButtonDown(0)){
-                    if(Time.time > timeToShoot){ // Rate of Fire
-                        timeToShoot = Time.time + extraTimePerShot;
-                        if(ammo>0 && cocked){
-                            ammo--;
-                            UpdateAmmoText();
-                            Shoot();
-                        }
-                        else if(ammo==0 && cocked){
-                            Shoot();
-                            cocked = false;
-                            UpdateCockedText();
-                        }else if(ammo>0 && !cocked){
-                            timeToShoot = Time.time + extraTimePerShot*2;
-                            ammo--;
-                            cocked = true;
-                            UpdateAmmoText();
-                            UpdateCockedText();
-                            Debug.Log("Executed slide release");
-                        }
-                    }
-                }
-            }
-
-            // Cocking / Charging
-            if(Input.GetKeyDown(KeyCode.X)){
-                if(ammo>0){
-                    ammo--;
-                    UpdateAmmoText();
-                    cocked = true;
-                    UpdateCockedText();
-                }else if(ammo==0 && cocked){
-                    cocked=false;
-                    UpdateCockedText();
-                }
-            }
-        }
-
-        // Reload
-        if(Input.GetKeyDown(KeyCode.R) && !reloading){
-            reloading=true;
-            timeToReload = Time.time + reloadTime;
-            sliderObject.SetActive(true);
-        }
+        
 
         if(reloading){
             sliderScript.value = ((Time.time - timeToReload)+reloadTime)/reloadTime;
@@ -287,6 +293,12 @@ public class GunObjectScript : MonoBehaviour
             SetRateOfFire(80);
             break;
         }
+    }
+
+    public void gManInterupt(bool halt){
+        gManHalt = halt;
+        reloading = false;
+        sliderObject.SetActive(false);
     }
 
     public int GetWepID(){
