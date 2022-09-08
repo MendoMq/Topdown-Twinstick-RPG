@@ -620,7 +620,6 @@ GameObject:
   - component: {fileID: 6638355906379502425}
   - component: {fileID: 4511282178677212393}
   - component: {fileID: 38947732271891090}
-  - component: {fileID: 8573148725730348845}
   - component: {fileID: 2444957355596314239}
   m_Layer: 8
   m_Name: PlayerFOVMeshFilter
@@ -695,20 +694,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8573148725730348845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097538318101793580}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcde20d44e394514d8d8e9098ffccc6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 782928828929660697}
-  mirror: {fileID: 0}
 --- !u!64 &2444957355596314239
 MeshCollider:
   m_ObjectHideFlags: 0
