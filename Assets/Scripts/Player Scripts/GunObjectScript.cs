@@ -200,7 +200,14 @@ public class GunObjectScript : MonoBehaviour
                 }
 
                 if(hit.transform.root.GetComponent<EntityHealth>()!=null){
-                    hit.transform.root.GetComponent<EntityHealth>().Damage(weaponDamage);
+                    float dmgEffective;
+                    if(hit.transform.gameObject.GetComponent<PositionalDamageMulti>()!=null){
+                        dmgEffective = weaponDamage * hit.transform.gameObject.GetComponent<PositionalDamageMulti>().damageMulti;
+                    }else{
+                        dmgEffective = weaponDamage;
+                    }
+                    
+                    hit.transform.root.GetComponent<EntityHealth>().Damage(dmgEffective);
                 }
 
                 Debug.DrawLine(transform.position, hit.point, color, 5);
