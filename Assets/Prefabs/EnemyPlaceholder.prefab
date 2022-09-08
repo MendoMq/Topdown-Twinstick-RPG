@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3769781855866450468}
   - component: {fileID: 295426248}
   - component: {fileID: 8288865670948013199}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: EnemyHead (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3cc5196f8ae889d48b7e3a29c1896f07, type: 2}
+  - {fileID: 2100000, guid: 9cb4fbc10ec49db42b94a8bd157f23d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 1421689950476943774}
   - component: {fileID: 121217597927612658}
   - component: {fileID: 896757076628721117}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: EnemyBody (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3cc5196f8ae889d48b7e3a29c1896f07, type: 2}
+  - {fileID: 2100000, guid: 9cb4fbc10ec49db42b94a8bd157f23d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
